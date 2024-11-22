@@ -1,64 +1,61 @@
 package com.tasktracker;
 
-import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
     public static void main(String[] args) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String caminhoArquivo = "Task.json";
-        File arquivoJson = new File(caminhoArquivo);
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner input = new Scanner(System.in);
-        
-        try {
-            if(!arquivoJson.exists()){
-                if(arquivoJson.createNewFile()){
-                    System.out.println("Arquivo criado.");
-                }else{
-                    System.out.println("Erro ao criar arquivo");
-                }
-            }else{
-                System.out.println("Arquivo já existe!!!");
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("Erro de execução!!!" + e);
-        }
 
-        /*
-        try {
-            objectMapper.writeValue(arquivoJson, newTask);
-            
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("Erro de execução!!!" + e);
-        }
-        */
-        System.out.println("""
-                1. Add, Update, and Delete tasks
-                2. Mark a task as in progress or done
-                3. List all tasks
-                4. List all tasks that are done
-                5. List all tasks that are not done
-                6. List all tasks that are in progress
-                7. Exit.
-                """);
-        System.out.print("Choose one option: ");
-        int entradaUsuario = input.nextInt();
+        JsonConverter jsonConverter = new JsonConverter();
+        ConstrucaoTask(input, tasks);
 
-        switch (input) {
-            case value:
-                
-                break;
-        
-            default:
-                break;
+        for (Task iterable_element : tasks) {
+            jsonConverter.Serialization(iterable_element);
         }
+        Task task = jsonConverter.deserialization();
+        task.toString();
+
     }
-    
+    public static void ConstrucaoTask(Scanner input, ArrayList<Task> tasks){
+        int id;
+        String description;
+        String status = "";
+        LocalDateTime createdAT;
+        LocalDateTime updatedAT;
+
+        id = new Random().nextInt(1000+1);
+        System.out.print("Insert the description of Task: ");
+        description = input.nextLine();
+        System.out.println("""
+            Choose the option for status of your Task
+            1. Done.
+            2. To-Do.
+            3. In-Progress.
+            """);
+        int option = input.nextInt();
+        switch (option) {
+            case 1:
+                status = "done";
+                break;
+            case 2:
+                status = "to-do";
+                break;
+            case 3:
+                status = "in-progress";
+                break;
+            default:
+                System.out.println("Incorrect option insert!!!");
+                break;
+        }
+        createdAT = LocalDateTime.now();
+        updatedAT = LocalDateTime.now();
+
+        Task task = new Task(id, description, status, createdAT, updatedAT);
+        tasks.add(task);
+    }
     
 }

@@ -1,7 +1,6 @@
 package com.tasktracker;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class Task {
     private int id;
@@ -10,6 +9,7 @@ public class Task {
     private LocalDateTime createdAT;
     private LocalDateTime updatedAT;
 
+    public Task(){}
     public Task(int id, String description, String status, LocalDateTime createdAT, LocalDateTime updatedAT){
         this.id = id;
         this.description = description;
@@ -44,5 +44,14 @@ public class Task {
     }
     public LocalDateTime getUpdatedAT() {
         return updatedAT;
+    }
+    public String toString() {
+        return "Task{" +
+                "\nid= " + id +
+                "\n, description= '" + description + '\'' +
+                "\n, status= '" + status + '\'' +
+                "\n, createdAT= " + createdAT +
+                "\n, updatedAT= " + updatedAT +
+                '}';
     }
 }
