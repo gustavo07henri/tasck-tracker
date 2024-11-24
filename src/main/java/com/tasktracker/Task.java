@@ -1,23 +1,27 @@
 package com.tasktracker;
 
-import java.time.LocalDateTime;
-
 public class Task {
+    private int lastId = 0;
     private int id;
     private String description;
     private String status;
-    private LocalDateTime createdAT;
-    private LocalDateTime updatedAT;
+    private String createdAT;
+    private String updatedAT;
 
     public Task(){}
-    public Task(int id, String description, String status, LocalDateTime createdAT, LocalDateTime updatedAT){
+    public Task(int id, String description, String status, String createdAT, String updatedAT){
         this.id = id;
         this.description = description;
         this.status = status;
         this.createdAT = createdAT;
         this.updatedAT = updatedAT;
     }
-
+    public void setLastId(int lastId) {
+        this.lastId = lastId;
+    }
+    public int getLastId() {
+        return lastId;
+    }
     public void setId(int id){
         this.id = id;
     }
@@ -36,13 +40,13 @@ public class Task {
     public String getStatus(){
         return status;
     }
-    public LocalDateTime getCreatedAT() {
+    public String getCreatedAT() {
         return createdAT;
     }
-    public void setUpdatedAT(LocalDateTime updatedAT) {
+    public void setUpdatedAT(String updatedAT) {
         this.updatedAT = updatedAT;
     }
-    public LocalDateTime getUpdatedAT() {
+    public String getUpdatedAT() {
         return updatedAT;
     }
     public String toString() {

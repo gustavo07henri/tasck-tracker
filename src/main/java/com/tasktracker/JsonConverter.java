@@ -14,15 +14,13 @@ public class JsonConverter {
             try {
                 if(!arquivoJson.exists()){
                     if(arquivoJson.createNewFile()){
-                        System.out.println("Arquivo criado.");
+
                     }else{
                         System.out.println("Erro ao criar arquivo");
                     }
                 }else{
-                    System.out.println("Arquivo já existe!!!");
                 }
             } catch (Exception e) {
-                // TODO: handle exception
                 System.out.println("Erro de execução!!!" + e);
             }
         }

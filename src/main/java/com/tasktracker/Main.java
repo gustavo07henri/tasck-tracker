@@ -1,8 +1,8 @@
 package com.tasktracker;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -11,51 +11,124 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         JsonConverter jsonConverter = new JsonConverter();
-        ConstrucaoTask(input, tasks);
+        
+        
 
-        for (Task iterable_element : tasks) {
-            jsonConverter.Serialization(iterable_element);
+       while (true) {
+            for (Task task : tasks) {
+                jsonConverter.Serialization(task);
+            }
+            String inputUser = input.nextLine();
+            switch (inputUser) {
+                case "add":
+                    ConstrucaoTask(input, tasks);
+                    break;
+                case "mark-in-progress":
+                    markInProgress(input, tasks);
+                    break;
+                case "mark-done":
+                    markInDone(input, tasks);
+                    break;
+                case "list":
+                    list(tasks);
+                    break;
+                case "exit":
+                    return;
+                default:
+                    System.out.println("Invalid insertion");
+                    break;
         }
-        Task task = jsonConverter.deserialization();
-        task.toString();
+       }
 
     }
     public static void ConstrucaoTask(Scanner input, ArrayList<Task> tasks){
-        int id;
+        Task task1 = new Task();
+        int id = task1.getId() + 1;
+        task1.setLastId(id);
         String description;
-        String status = "";
-        LocalDateTime createdAT;
-        LocalDateTime updatedAT;
+        String status = "To-Do";
+        String createdAT;
+        String updatedAT;
 
-        id = new Random().nextInt(1000+1);
-        System.out.print("Insert the description of Task: ");
         description = input.nextLine();
-        System.out.println("""
-            Choose the option for status of your Task
-            1. Done.
-            2. To-Do.
-            3. In-Progress.
-            """);
-        int option = input.nextInt();
-        switch (option) {
-            case 1:
-                status = "done";
-                break;
-            case 2:
-                status = "to-do";
-                break;
-            case 3:
-                status = "in-progress";
-                break;
-            default:
-                System.out.println("Incorrect option insert!!!");
-                break;
-        }
-        createdAT = LocalDateTime.now();
-        updatedAT = LocalDateTime.now();
+
+        LocalDateTime timeNow = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formatedDate = timeNow.format(formatter);
+        createdAT = formatedDate;   
+        updatedAT = formatedDate;
 
         Task task = new Task(id, description, status, createdAT, updatedAT);
         tasks.add(task);
+        JsonConverter JsonConverter = new JsonConverter();
+        JsonConverter.Serialization(task);
     }
+    public static void markInProgress(Scanner input, ArrayList<Task> tasks){
     
+        int idUserInput = input.nextInt();
+        try {
+            for (Task iterable_element : tasks) {
+                if(iterable_element.getId() == idUserInput){
+                    iterable_element.setStatus("In-Progress");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error!! "+ e );
+        }
+    }
+    public static void markInDone(Scanner input, ArrayList<Task> tasks){
+        input.nextLine();
+        int idUserInput = input.nextInt();
+        try {
+            for (Task iterable_element : tasks) {
+                if(iterable_element.getId() == idUserInput){
+                    iterable_element.setStatus("Done");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error!! "+ e );
+        }
+    }
+    public static void list (ArrayList<Task> tasks){
+        try {
+            for (Task task : tasks) {
+                System.out.println(task.toString());
+            }
+        } catch (Exception e) {
+            System.out.println("Error!!! " + e);
+        }
+    }
+    public static void listDone(ArrayList<Task> tasks){
+        try {
+            for (Task task : tasks) {
+                if(task.getStatus().equals("Done")){
+                    System.out.println(task.toString());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error!!! " + e);
+        }
+    }
+    public static void listToDo(ArrayList<Task> tasks){
+        try {
+            for (Task task : tasks) {
+                if(task.getStatus().equals("To-Do")){
+                    System.out.println(task.toString());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error!!! " + e);
+        }
+    }
+    public static void listInProgress(ArrayList<Task> tasks){
+        try {
+            for (Task task : tasks) {
+                if(task.getStatus().equals("In-Progress")){
+                    System.out.println(task.toString());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error!!! " + e);
+        }
+    }
 }
