@@ -1,7 +1,6 @@
 package com.tasktracker;
 
 public class Task {
-    private int lastId = 0;
     private int id;
     private String description;
     private String status;
@@ -16,12 +15,7 @@ public class Task {
         this.createdAT = createdAT;
         this.updatedAT = updatedAT;
     }
-    public void setLastId(int lastId) {
-        this.lastId = lastId;
-    }
-    public int getLastId() {
-        return lastId;
-    }
+
     public void setId(int id){
         this.id = id;
     }
@@ -49,13 +43,24 @@ public class Task {
     public String getUpdatedAT() {
         return updatedAT;
     }
+    @Override
     public String toString() {
-        return "Task{" +
-                "\nid= " + id +
-                "\n, description= '" + description + '\'' +
-                "\n, status= '" + status + '\'' +
-                "\n, createdAT= " + createdAT +
-                "\n, updatedAT= " + updatedAT +
-                '}';
+        return "Task Details:\n" +
+                "  ID: " + id + "\n" +
+                "  Description: " + description + "\n" +
+                "  Status: " + status + "\n" +
+                "  Created At: " + createdAT + "\n" +
+                "  Updated At: " + updatedAT + "\n";
+    }
+
+    public String toJson(){
+        return "{\n" +
+                "  \"id\": " + id + ",\n" +
+                "  \"description\": \"" + description + "\",\n" +
+                "  \"status\": \"" + status + "\",\n" +
+                "  \"createdAT\": \"" + createdAT + "\",\n" +
+                "  \"updatedAT\": \"" + updatedAT + "\"\n" +
+                "}";
     }
 }
+

@@ -7,17 +7,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<>();
+        Cli cli = new Cli();
+        cli.startCli();
+        /* 
+        ArrayList<Task> tasks = new JsonConverter().deserialization();
         Scanner input = new Scanner(System.in);
-
-        JsonConverter jsonConverter = new JsonConverter();
         
-        
+        for (Task iterable_element : tasks) {
+            System.out.println(iterable_element.toString());
+        }
 
-       while (true) {
-            for (Task task : tasks) {
-                jsonConverter.Serialization(task);
-            }
+        while (true) {
             String inputUser = input.nextLine();
             switch (inputUser) {
                 case "add":
@@ -32,19 +32,32 @@ public class Main {
                 case "list":
                     list(tasks);
                     break;
+                case "list-Done":
+                    listDone(tasks);
+                    break;
+                case "list-ToDo":
+                    listToDo(tasks);
+                    break;
+                case "list-InProgress":
+                    listInProgress(tasks);
+                    break;
                 case "exit":
                     return;
                 default:
                     System.out.println("Invalid insertion");
                     break;
+            }
         }
-       }
-
+        */
     }
+    /*
     public static void ConstrucaoTask(Scanner input, ArrayList<Task> tasks){
         Task task1 = new Task();
-        int id = task1.getId() + 1;
-        task1.setLastId(id);
+        int id = 0;
+        if(tasks.size() != 0){
+            int ultimoIndex = tasks.size() -1;
+            id = tasks.get(ultimoIndex).getId() +1;
+        }
         String description;
         String status = "To-Do";
         String createdAT;
@@ -61,7 +74,9 @@ public class Main {
         Task task = new Task(id, description, status, createdAT, updatedAT);
         tasks.add(task);
         JsonConverter JsonConverter = new JsonConverter();
-        JsonConverter.Serialization(task);
+        JsonConverter.Serialization(tasks);
+
+        System.out.printf("Description of Task: %s [%d]\n",description, id);
     }
     public static void markInProgress(Scanner input, ArrayList<Task> tasks){
     
@@ -69,7 +84,13 @@ public class Main {
         try {
             for (Task iterable_element : tasks) {
                 if(iterable_element.getId() == idUserInput){
+                    LocalDateTime timeNow = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                    String formatedDate = timeNow.format(formatter);
+                    String updatedAt = formatedDate;   
+
                     iterable_element.setStatus("In-Progress");
+                    iterable_element.setUpdatedAT(updatedAt);
                 }
             }
         } catch (Exception e) {
@@ -82,7 +103,14 @@ public class Main {
         try {
             for (Task iterable_element : tasks) {
                 if(iterable_element.getId() == idUserInput){
+                    
+                    LocalDateTime timeNow = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                    String formatedDate = timeNow.format(formatter);
+                    String updatedAt = formatedDate;
+
                     iterable_element.setStatus("Done");
+                    iterable_element.setUpdatedAT(updatedAt);
                 }
             }
         } catch (Exception e) {
@@ -131,4 +159,6 @@ public class Main {
             System.out.println("Error!!! " + e);
         }
     }
+        */
 }
+    
