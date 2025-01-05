@@ -1,6 +1,9 @@
 # Task Tracker CLI
 
-Este é um programa de linha de comando (CLI) para gerenciar tarefas. Ele permite adicionar, atualizar, excluir e listar tarefas, bem como marcar tarefas com diferentes status.
+Este é um programa proposto pelo desáfio [task-tracker](https://roadmap.sh/projects/task-tracker) advindo de [roadmap.sh](https://roadmap.sh/).
+Se trata de um programa de linha de comando (CLI) para gerenciar tarefas. 
+Ele permite adicionar, atualizar, excluir e listar tarefas, bem como marcar tarefas com diferentes status.
+
 
 ## Funcionalidades
 
@@ -17,7 +20,7 @@ Este é um programa de linha de comando (CLI) para gerenciar tarefas. Ele permit
 ## Como usar
 
 1. Clone o repositório para sua máquina local.
-   `https://github.com/gustavo07henri/tasck-tracker`
+   `https://roadmap.sh/projects/task-tracker`
 3. Abra o projeto na sua IDE preferida (como o IntelliJ IDEA, Eclipse ou VS Code).
 4. Execute a classe `Main.java` para iniciar o programa.
 
