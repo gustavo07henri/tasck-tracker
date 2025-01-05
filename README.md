@@ -17,8 +17,9 @@ Este é um programa de linha de comando (CLI) para gerenciar tarefas. Ele permit
 ## Como usar
 
 1. Clone o repositório para sua máquina local.
-2. Abra o projeto na sua IDE preferida (como o IntelliJ IDEA, Eclipse ou VS Code).
-3. Execute a classe `Main.java` para iniciar o programa.
+   `https://github.com/gustavo07henri/tasck-tracker`
+3. Abra o projeto na sua IDE preferida (como o IntelliJ IDEA, Eclipse ou VS Code).
+4. Execute a classe `Main.java` para iniciar o programa.
 
 
 ## Comandos
